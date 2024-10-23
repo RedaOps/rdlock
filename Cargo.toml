@@ -1,0 +1,10 @@
+[package]
+name = "rdlock"
+version = "0.1.0"
+edition = "2021"
+description = "A library for distributed redis locks written in rust"
+license = "MIT"
+repository = "https://github.com/RedaOps/rdlock"
+
+[dependencies]
+bb8-redis = "0.17.0"
