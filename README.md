@@ -1,5 +1,8 @@
 # rdlock
 
+[![Crates.io](https://img.shields.io/crates/v/rdlock.svg)](https://crates.io/crates/rdlock)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+
 A library for distributed redis locks written in rust.
 
 Only supports redis through bb8 connection pools
