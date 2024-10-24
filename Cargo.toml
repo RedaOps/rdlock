@@ -8,3 +8,4 @@ repository = "https://github.com/RedaOps/rdlock"
 
 [dependencies]
 bb8-redis = "0.17.0"
+anyhow = "1.0.79"

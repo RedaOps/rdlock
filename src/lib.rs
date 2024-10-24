@@ -1,14 +1,20 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+use bb8_redis::{bb8::Pool, RedisConnectionManager};
+
+pub(crate) type RedisConnectionPool = Pool<RedisConnectionManager>;
+
+pub(crate) fn get_lock_file(id: &String) -> String {
+    format!("/rdlock/{id}/.lock")
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub(crate) enum LockState {
+    Locked,
+    Unlocked,
+}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+impl std::default::Default for LockState {
+    fn default() -> Self {
+        Self::Unlocked
     }
 }
+
+pub mod lock;
