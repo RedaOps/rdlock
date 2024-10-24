@@ -12,6 +12,9 @@ If this is too much overhead for your current instance, consider running a separ
 
 Usage and examples on [docs.rs](https://docs.rs/rdlock/latest/rdlock/)
 
+## Supported primitives
+* `BasicLock` - a basic type of distributed lock with no protected data. This is the most basic synchronization primitive.
+
 ## TLDR
 It uses redis SET with the NX option enabled for creating a "lockfile".
 
@@ -20,9 +23,6 @@ Any `lock` function that waits for the lock to become available (e.g: `.lock()` 
 ## Known issues
 * The local TTL check, which checks if the TTL of the specific lock expired before doing any extra actions, is not perfect, since it's only a local sanity TTL check, and doesn't verify TTL in any way with the redis instance.
 * If the `pubsub` drops while waiting for a lock and/or we miss a message, we will never acquire it, since redis pubsub is fire and forget.
-
-## Supported locks
-* `BasicLock` - a basic type of distributed lock with no protected data. This is the most basic synchronization primitive.
 
 ## TODO
 * Move generic lock functions that will be used in all locks out of `src/lock/mod.rs`
