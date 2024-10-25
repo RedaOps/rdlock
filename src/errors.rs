@@ -36,3 +36,13 @@ impl std::fmt::Display for RdLockError {
         write!(f, "{msg}")
     }
 }
+
+impl std::error::Error for RdLockError {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        if let Self::RedisError(e) = self {
+            Some(e)
+        } else {
+            None
+        }
+    }
+}
