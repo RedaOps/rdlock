@@ -110,7 +110,11 @@ impl BasicLock {
         loop {
             tokio::select! {
                 _ = timeout_interval.tick() => {
-                    return Err(RdLockError::TimeoutReached);
+                    if self.try_lock().await.is_ok() {
+                        return Ok(());
+                    } else {
+                        return Err(RdLockError::TimeoutReached);
+                    }
                 }
 
                 msg = message_stream.next() => {
